@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression';
 import path from 'path';
 
-export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/portfolio/' : '/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/portfolio/' : '/',
   plugins: [
     react(),
     compression({
@@ -50,5 +50,5 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 500,
   },
-});
+}));
 
