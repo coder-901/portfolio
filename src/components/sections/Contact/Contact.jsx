@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { RiMailLine, RiWhatsappLine, RiSendPlaneLine } from 'react-icons/ri';
+import { RiMailLine, RiWhatsappLine, RiSendPlaneLine, RiLinkedinBoxFill } from 'react-icons/ri';
 import emailjs from '@emailjs/browser';
 import { personalInfo } from '@data/personal';
 import Button from '@components/common/Button/Button';
@@ -63,22 +63,27 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-bg-card border border-border rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:border-accent">
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="bg-bg-card border border-border rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:border-accent"
+          >
             <div className="w-12 h-12 rounded-xl bg-bg-tertiary text-accent text-2xl flex items-center justify-center flex-shrink-0">
               <RiMailLine />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-base font-semibold mb-1">Email</h3>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="text-sm text-text-secondary hover:text-accent transition-colors duration-300 break-all"
-              >
+              <p className="text-sm text-text-secondary hover:text-accent transition-colors duration-300 break-all">
                 {personalInfo.email}
-              </a>
+              </p>
             </div>
-          </div>
+          </a>
 
-          <div className="bg-bg-card border border-border rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:border-accent">
+          <a
+            href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-bg-card border border-border rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:border-accent"
+          >
             <div className="w-12 h-12 rounded-xl bg-bg-tertiary text-accent text-2xl flex items-center justify-center flex-shrink-0">
               <RiWhatsappLine />
             </div>
@@ -87,7 +92,24 @@ const Contact = () => {
               <p className="text-sm text-text-secondary">{personalInfo.phone}</p>
               <span className="text-xs text-text-muted italic">Message Only</span>
             </div>
-          </div>
+          </a>
+
+          <a
+            href={personalInfo.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-bg-card border border-border rounded-2xl p-6 flex items-start gap-4 transition-all duration-300 hover:border-accent"
+          >
+            <div className="w-12 h-12 rounded-xl bg-bg-tertiary text-accent text-2xl flex items-center justify-center flex-shrink-0">
+              <RiLinkedinBoxFill />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-base font-semibold mb-1">LinkedIn</h3>
+              <p className="text-sm text-text-secondary hover:text-accent transition-colors duration-300">
+                Connect with me
+              </p>
+            </div>
+          </a>
         </motion.div>
 
         <motion.form

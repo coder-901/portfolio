@@ -18,7 +18,7 @@ export const education = [
   },
   {
     id: 2,
-    degree: 'Class 12th',
+    degree: 'Class 12th (CBSE Board)',
     field: 'Science Stream (Physics, Chemistry, Mathematics)',
     institution: 'Kendriya Vidyalaya 1 S.T.C, Sadar',
     location: 'Jabalpur, Madhya Pradesh, India',
@@ -30,7 +30,7 @@ export const education = [
   },
   {
     id: 3,
-    degree: 'Class 10th',
+    degree: 'Class 10th (CBSE Board)',
     field: 'Hindi, English, Mathematics, Science, Social Studies',
     institution: 'Kendriya Vidyalaya 1 S.T.C, Sadar',
     location: 'Jabalpur, Madhya Pradesh, India',
