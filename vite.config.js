@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression';
 import path from 'path';
 
 export default defineConfig({
-  base: '/portfolio/',
+  base: process.env.NODE_ENV === 'production' ? '/portfolio/' : '/',
   plugins: [
     react(),
     compression({
