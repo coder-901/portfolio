@@ -102,12 +102,32 @@ const Education = () => {
                     <RiMapPinLine className="text-accent" />
                     <span>{edu.location}</span>
                   </div>
-                  {edu.gpa && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-accent font-semibold">GPA:</span>
-                      <span>{edu.gpa}</span>
-                    </div>
-                  )}
+                  {edu.gpa && (() => {
+                    // Check if it's college level (B.E., Bachelor, Engineering, etc.)
+                    const isCollege = edu.degree.toLowerCase().includes('bachelor') || 
+                                     edu.degree.toLowerCase().includes('b.e.') || 
+                                     edu.degree.toLowerCase().includes('engineering') ||
+                                     edu.degree.toLowerCase().includes('degree');
+                    
+                    if (isCollege) {
+                      // Display as CGPA
+                      return (
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent font-semibold">CGPA:</span>
+                          <span>{edu.gpa}</span>
+                        </div>
+                      );
+                    } else {
+                      // Display as Percentage for school
+                      const percentage = edu.gpa.split('/')[0];
+                      return (
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent font-semibold">Percentage:</span>
+                          <span>{percentage}%</span>
+                        </div>
+                      );
+                    }
+                  })()}
                 </div>
 
                 {edu.description && (
