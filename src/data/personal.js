@@ -1,3 +1,5 @@
+const BASE_URL = import.meta.env.BASE_URL;
+
 export const personalInfo = {
   name: 'Tarun Kumar',
   title: 'Data Analyst & Front-End Developer',
@@ -8,7 +10,7 @@ export const personalInfo = {
   email: 'trn901@gmail.com',
   phone: '+91-8435206720',
   location: 'India',
-  resumeUrl: '/Resume.pdf',
+  resumeUrl: `${BASE_URL}Resume.pdf`,
   
   social: {
     linkedin: 'https://www.linkedin.com/in/tarun-kumar-74b0031a1',

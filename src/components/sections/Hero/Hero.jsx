@@ -140,7 +140,7 @@ const Hero = () => {
       >
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
           <img
-            src="/img/dev2.jpeg"
+            src={`${import.meta.env.BASE_URL}img/dev2.jpeg`}
             alt={personalInfo.name}
             className="w-full h-full object-cover rounded-3xl relative z-10 shadow-2xl"
           />
