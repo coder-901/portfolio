@@ -24,6 +24,7 @@ export const personalInfo = {
 export const navLinks = [
   { id: 'home', label: 'Home', href: '#home' },
   { id: 'about', label: 'About', href: '#about' },
+  { id: 'experience', label: 'Experience', href: '#experience' },
   { id: 'education', label: 'Education', href: '#education' },
   { id: 'projects', label: 'Projects', href: '#projects' },
   { id: 'contact', label: 'Contact', href: '#contact' },

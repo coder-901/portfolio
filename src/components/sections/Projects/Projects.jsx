@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { RiGithubFill, RiExternalLinkLine } from 'react-icons/ri';
+import { RiCodeBoxLine, RiExternalLinkLine } from 'react-icons/ri';
 import { projects } from '@data/projects';
 
 const Projects = () => {
@@ -7,16 +7,16 @@ const Projects = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, x: -30 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
+      x: 0,
+      transition: { duration: 0.6 },
     },
   };
 
@@ -33,81 +33,123 @@ const Projects = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-          Featured <span className="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">Projects</span>
+          Featured{' '}
+          <span className="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">
+            Projects
+          </span>
         </h2>
-        <p className="text-base md:text-lg text-text-secondary">Some of my recent work</p>
+        <p className="text-base md:text-lg text-text-secondary">
+          Company products I have built and shipped
+        </p>
       </motion.div>
 
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-      >
-        {projects.map((project) => (
-          <motion.article
-            key={project.id}
-            className="bg-bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent hover:-translate-y-2 hover:shadow-glow"
-            variants={itemVariants}
-          >
-            <div className="relative overflow-hidden aspect-video group">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-bg-primary/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-accent text-bg-primary text-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110"
-                    aria-label="GitHub"
-                  >
-                    <RiGithubFill />
-                  </a>
+      <div className="relative">
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-0.5 hidden md:block" />
+
+        <motion.div
+          className="space-y-8 md:space-y-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              className="relative flex items-start gap-6 md:gap-8"
+              variants={itemVariants}
+            >
+              <div className="relative z-10 flex-shrink-0">
+                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-bg-card border-2 border-accent flex items-center justify-center">
+                  <RiCodeBoxLine className="text-accent text-sm md:text-xl" />
+                </div>
+                {index !== projects.length - 1 && (
+                  <div className="absolute left-1/2 top-8 md:top-12 w-0.5 h-full bg-border -translate-x-0.5 md:hidden" />
                 )}
+              </div>
+
+              <div className="flex-1 bg-bg-card border border-border rounded-2xl p-6 md:p-8 hover:border-accent transition-all duration-300 hover:shadow-glow">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-lg font-semibold text-accent mb-1">{project.company}</p>
+                    {project.companyNote && (
+                      <p className="text-sm text-text-muted mb-3">{project.companyNote}</p>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 self-start">
+                    <span className="px-3 py-1 bg-bg-tertiary text-text-secondary text-xs font-medium rounded-full border border-border">
+                      {project.category}
+                    </span>
+                    {project.status === 'live' && (
+                      <span className="px-3 py-1 bg-accent/10 text-accent text-xs font-medium rounded-full border border-accent/30">
+                        Live
+                      </span>
+                    )}
+                    {project.status === 'company' && (
+                      <span className="px-3 py-1 bg-green-500/10 text-green-400 text-xs font-medium rounded-full border border-green-500/30">
+                        Company Project
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {project.description && (
+                  <p className="text-sm md:text-base text-text-secondary leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                )}
+
                 {project.demo && (
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-accent text-bg-primary text-2xl flex items-center justify-center transition-transform duration-300 hover:scale-110"
-                    aria-label="Live Demo"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-300 mb-4"
                   >
                     <RiExternalLinkLine />
+                    <span>{project.demo.replace(/^https?:\/\//, '')}</span>
                   </a>
                 )}
-              </div>
-            </div>
 
-            <div className="p-6">
-              <span className="text-xs font-mono text-accent uppercase tracking-wider">
-                {project.category}
-              </span>
-              <h3 className="text-xl font-semibold mt-2 mb-3">{project.title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs font-mono px-2 py-1 bg-bg-tertiary rounded text-text-secondary"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {project.highlights && project.highlights.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <h4 className="text-sm font-semibold text-text-primary mb-3">Highlights:</h4>
+                    <ul className="space-y-2">
+                      {project.highlights.map((highlight) => (
+                        <li
+                          key={highlight}
+                          className="flex items-start gap-2 text-sm text-text-secondary"
+                        >
+                          <span className="text-accent mt-1.5">▸</span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-mono px-2 py-1 bg-bg-tertiary rounded text-text-secondary"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-          </motion.article>
-        ))}
-      </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 };
 
 export default Projects;
-

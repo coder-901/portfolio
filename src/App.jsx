@@ -3,6 +3,7 @@ import Header from '@components/layout/Header/Header';
 import Footer from '@components/layout/Footer/Footer';
 import Hero from '@components/sections/Hero/Hero';
 import About from '@components/sections/About/About';
+import Experience from '@components/sections/Experience/Experience';
 import Education from '@components/sections/Education/Education';
 import Skills from '@components/sections/Skills/Skills';
 import Projects from '@components/sections/Projects/Projects';
@@ -56,6 +57,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Experience />
         <Education />
         <Skills />
         <Projects />
